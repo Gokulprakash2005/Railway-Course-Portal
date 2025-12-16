@@ -205,7 +205,7 @@ function LearnContent() {
     <div className="min-h-screen bg-gray-50">
       {/* TOP HEADER */}
       <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
               <Link href="/dashboard" className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors">
@@ -216,9 +216,9 @@ function LearnContent() {
                 <span className="sm:hidden">Back</span>
               </Link>
               <div className="hidden sm:block h-6 w-px bg-gray-300"></div>
-              <div>
-                <h1 className="text-lg lg:text-xl font-bold text-gray-900 line-clamp-1">{courseTitle}</h1>
-                <p className="text-sm text-gray-600">by Dr. Rajesh Kumar</p>
+              <div className="min-w-0 flex-1">
+                <h1 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 truncate">{courseTitle}</h1>
+                <p className="text-xs sm:text-sm text-gray-600">by Dr. Rajesh Kumar</p>
               </div>
             </div>
             
@@ -371,18 +371,18 @@ function LearnContent() {
                   </video>
                 )
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
-                  <div className="text-center">
-                    <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-10 h-10 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 p-4">
+                  <div className="text-center max-w-md mx-auto">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-8 h-8 sm:w-10 sm:h-10 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{module.title}</h3>
-                    <p className="text-gray-600 mb-6">Click below to view the PDF materials</p>
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 px-2">{module.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 mb-6 px-2">Click below to view the PDF materials</p>
                     <a
                       href={`/pdf-viewer?pdf=${encodeURIComponent(module.content)}&title=${encodeURIComponent(module.title)}&course=${encodeURIComponent(courseTitle)}&lesson=${currentLesson}&module=${currentModule}`}
-                      className="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 font-semibold inline-block transition-colors duration-200 shadow-lg"
+                      className="bg-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-xl hover:bg-blue-700 font-semibold inline-block transition-colors duration-200 shadow-lg text-sm sm:text-base"
                     >
                       📖 Open PDF
                     </a>

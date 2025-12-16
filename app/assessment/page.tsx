@@ -183,12 +183,16 @@ function AssessmentContent() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         {/* Header */}
         <div className="bg-white shadow-sm border-b">
-          <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-3">
-              <img src="/logo.png" alt="Logo" className="w-8 h-8" />
-              <span className="font-semibold text-gray-800">Southern Railway</span>
-            </Link>
-            <div className="text-sm text-gray-600">Assessment Complete</div>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+              <Link href="/" className="flex items-center gap-3">
+                <img src="/logo.png" alt="Logo" className="w-8 h-8" />
+                <div className="flex flex-col">
+                  <span className="font-semibold text-gray-800 text-sm sm:text-base">Southern Railway</span>
+                </div>
+              </Link>
+              <div className="text-xs sm:text-sm text-gray-600">Assessment Complete</div>
+            </div>
           </div>
         </div>
 
