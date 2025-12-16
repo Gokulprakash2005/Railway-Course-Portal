@@ -1,9 +1,9 @@
 'use client'
 
 import { useSearchParams, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 
-export default function PDFViewerPage() {
+function PDFViewerContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pdfUrl = searchParams.get('pdf')
@@ -95,5 +95,13 @@ export default function PDFViewerPage() {
         </iframe>
       </div>
     </div>
+  )
+}
+
+export default function PDFViewerPage() {
+  return (
+    <Suspense fallback={<div className="h-screen w-screen bg-gray-900 flex items-center justify-center"><div className="text-white text-lg">Loading PDF viewer...</div></div>}>
+      <PDFViewerContent />
+    </Suspense>
   )
 }

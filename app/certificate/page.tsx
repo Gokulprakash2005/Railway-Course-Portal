@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Page() {
+function CertificateContent() {
   const [user, setUser] = useState<any>(null)
   const searchParams = useSearchParams()
 
@@ -109,5 +109,13 @@ export default function Page() {
         </Link>
       </div>
     </div>
+  )
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-200 flex items-center justify-center"><div className="text-lg">Loading certificate...</div></div>}>
+      <CertificateContent />
+    </Suspense>
   )
 }

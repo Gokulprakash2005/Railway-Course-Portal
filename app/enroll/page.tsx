@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function EnrollPage() {
+function EnrollContent() {
   const [user, setUser] = useState<any>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -89,5 +89,13 @@ export default function EnrollPage() {
       </main>
 
     </div>
+  )
+}
+
+export default function EnrollPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="text-lg">Loading enrollment...</div></div>}>
+      <EnrollContent />
+    </Suspense>
   )
 }
