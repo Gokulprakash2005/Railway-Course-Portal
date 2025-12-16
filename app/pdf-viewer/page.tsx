@@ -23,14 +23,22 @@ function PDFViewerContent() {
   const handleComplete = () => {
     // Mark module as completed and return to learn page
     if (course && lesson && module) {
-      const progressKey = `progress_${course.replace(/\s+/g, '_')}`
-      const savedProgress = localStorage.getItem(progressKey)
-      const progress = savedProgress ? JSON.parse(savedProgress) : { completedModules: [] }
-      
-      const moduleId = `${lesson}-${module}`
-      if (!progress.completedModules.includes(moduleId)) {
-        progress.completedModules.push(moduleId)
-        localStorage.setItem(progressKey, JSON.stringify(progress))
+      const userData = localStorage.getItem('user')
+      if (userData) {
+        const user = JSON.parse(userData)
+        const progressKey = `progress_${user.email}_${course.replace(/\s+/g, '_')}`
+        const savedProgress = localStorage.getItem(progressKey)
+        const progress = savedProgress ? JSON.parse(savedProgress) : { 
+          currentLesson: 0,
+          currentModule: 0,
+          completedModules: [] 
+        }
+        
+        const moduleId = `${lesson}-${module}`
+        if (!progress.completedModules.includes(moduleId)) {
+          progress.completedModules.push(moduleId)
+          localStorage.setItem(progressKey, JSON.stringify(progress))
+        }
       }
       
       router.push(`/learn?course=${encodeURIComponent(course)}`)

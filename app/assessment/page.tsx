@@ -250,15 +250,15 @@ function AssessmentContent() {
                   <p className="text-green-800 font-semibold">🎉 Congratulations! You passed the assessment!</p>
                   <p className="text-green-700 text-sm mt-1">You've successfully demonstrated your knowledge in {courseTitle}</p>
                 </div>
-                <div className="flex gap-3 justify-center">
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <button
                     onClick={generateCertificate}
-                    className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 font-semibold transition-colors"
+                    className="w-full sm:w-auto bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 font-semibold transition-colors"
                   >
                     📄 Download Certificate PDF
                   </button>
                   <Link href="/dashboard">
-                    <button className="bg-gray-100 text-gray-700 px-8 py-3 rounded-xl hover:bg-gray-200 font-semibold transition-colors">
+                    <button className="w-full sm:w-auto bg-gray-100 text-gray-700 px-8 py-3 rounded-xl hover:bg-gray-200 font-semibold transition-colors">
                       Back to Dashboard
                     </button>
                   </Link>

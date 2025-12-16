@@ -73,16 +73,16 @@ function EnrollContent() {
               </div>
             </div>
 
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={handleEnroll}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 font-semibold"
+                className="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 font-semibold transition-colors"
               >
                 Enroll Now - FREE
               </button>
               <button 
                 onClick={() => router.back()}
-                className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50"
+                className="w-full sm:w-auto border border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 transition-colors"
               >
                 Go Back
               </button>

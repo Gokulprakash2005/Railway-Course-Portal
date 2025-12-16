@@ -371,20 +371,23 @@ function LearnContent() {
                   </video>
                 )
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 p-4">
-                  <div className="text-center max-w-md mx-auto">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 sm:w-10 sm:h-10 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-4 sm:p-6 min-h-[400px]">
+                  <div className="flex flex-col items-center justify-center text-center w-full max-w-xs sm:max-w-sm mx-auto">
+                    <div className="w-16 sm:w-20 h-16 sm:h-20 bg-blue-100 rounded-xl sm:rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg">
+                      <svg className="w-8 sm:w-10 h-8 sm:h-10 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 px-2">{module.title}</h3>
-                    <p className="text-sm sm:text-base text-gray-600 mb-6 px-2">Click below to view the PDF materials</p>
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{module.title}</h3>
+                    <p className="text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed">Tap the button below to open and view the PDF document</p>
                     <a
                       href={`/pdf-viewer?pdf=${encodeURIComponent(module.content)}&title=${encodeURIComponent(module.title)}&course=${encodeURIComponent(courseTitle)}&lesson=${currentLesson}&module=${currentModule}`}
-                      className="bg-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-xl hover:bg-blue-700 font-semibold inline-block transition-colors duration-200 shadow-lg text-sm sm:text-base"
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl hover:from-blue-700 hover:to-blue-800 font-semibold flex items-center justify-center gap-2 sm:gap-3 transition-all duration-200 shadow-xl hover:shadow-2xl text-sm sm:text-base"
                     >
-                      📖 Open PDF
+                      <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
+                      </svg>
+                      Open PDF Document
                     </a>
                   </div>
                 </div>
