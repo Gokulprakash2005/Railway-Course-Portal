@@ -135,7 +135,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, {user?.name}!</h1>
-            <p className="text-gray-600">Continue your learning journey</p>
+            <p className="text-gray-800">Continue your learning journey</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -145,8 +145,8 @@ export default function Dashboard() {
                 {courses.length === 0 ? (
                   <div className="bg-white rounded-lg p-6 text-center">
                     <div className="text-gray-400 text-4xl mb-4">📚</div>
-                    <h3 className="text-lg font-semibold text-gray-700 mb-2">No Enrolled Courses</h3>
-                    <p className="text-gray-500 mb-4">Start your learning journey by enrolling in courses</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">No Enrolled Courses</h3>
+                    <p className="text-gray-800 mb-4">Start your learning journey by enrolling in courses</p>
                     <Link href="/courses">
                       <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                         Browse Courses
@@ -167,7 +167,7 @@ export default function Dashboard() {
                             </span>
                           )}
                         </div>
-                        <p className="text-xs sm:text-sm text-gray-600">by {course.instructor}</p>
+                        <p className="text-xs sm:text-sm text-gray-800">by {course.instructor}</p>
                         <div className="mt-2">
                           <div className="flex justify-between text-xs sm:text-sm mb-1">
                             <span>Progress</span>

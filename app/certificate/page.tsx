@@ -93,21 +93,7 @@ function CertificateContent() {
         </div>
       </div>
 
-      {/* ACTIONS */}
-      <div className="fixed bottom-6 right-6 print:hidden flex gap-3">
-        <button
-          onClick={() => window.print()}
-          className="bg-[#0b4ea2] text-white px-6 py-3 rounded-lg"
-        >
-          Print
-        </button>
 
-        <Link href="/dashboard">
-          <button className="border px-6 py-3 rounded-lg bg-white">
-            Back
-          </button>
-        </Link>
-      </div>
     </div>
   )
 }
