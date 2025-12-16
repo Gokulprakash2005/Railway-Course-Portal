@@ -18,22 +18,52 @@ export default function Dashboard() {
     window.location.href = '/'
   }
 
-  const courses = [
+  const [courses, setCourses] = useState([
     {
-      title: "Complete Web Development",
-      instructor: "John Smith",
-      progress: 45,
+      title: "25kV Vacuum Circuit Breaker Maintenance",
+      instructor: "Dr. Rajesh Kumar",
+      progress: 0,
       image: "/OIP (4).jpg",
-      category: "Web Development",
+      category: "Railway Safety",
+      completed: false
     },
     {
-      title: "Data Science Fundamentals", 
-      instructor: "Sarah Johnson",
-      progress: 20,
+      title: "Railway Signal Systems", 
+      instructor: "Eng. Priya Sharma",
+      progress: 0,
       image: "/OIP (5).jpg",
-      category: "Data Science",
+      category: "Signal Engineering",
+      completed: false
     }
-  ]
+  ])
+
+  useEffect(() => {
+    // Load progress from localStorage
+    const updatedCourses = courses.map(course => {
+      const progressKey = `progress_${course.title.replace(/\s+/g, '_')}`
+      const savedProgress = localStorage.getItem(progressKey)
+      if (savedProgress) {
+        const progress = JSON.parse(savedProgress)
+        const totalModules = getCourseModuleCount(course.title)
+        const completedCount = progress.completedModules?.length || 0
+        const progressPercent = Math.min((completedCount / totalModules) * 100, 100)
+        return {
+          ...course,
+          progress: Math.round(progressPercent),
+          completed: progressPercent === 100
+        }
+      }
+      return course
+    })
+    setCourses(updatedCourses)
+  }, [user])
+
+  const getCourseModuleCount = (courseTitle: string) => {
+    if (courseTitle === '25kV Vacuum Circuit Breaker Maintenance') {
+      return 6 // 3 sections × 2 modules each
+    }
+    return 6 // Default module count
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
@@ -82,7 +112,14 @@ export default function Dashboard() {
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                       <img src={course.image} alt={course.title} className="w-16 h-16 rounded object-cover" />
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-sm sm:text-base">{course.title}</h3>
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="font-semibold text-sm sm:text-base">{course.title}</h3>
+                          {course.completed && (
+                            <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium">
+                              ✓ Completed
+                            </span>
+                          )}
+                        </div>
                         <p className="text-xs sm:text-sm text-gray-600">by {course.instructor}</p>
                         <div className="mt-2">
                           <div className="flex justify-between text-xs sm:text-sm mb-1">
@@ -90,13 +127,31 @@ export default function Dashboard() {
                             <span>{course.progress}%</span>
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div className="bg-blue-600 h-2 rounded-full" style={{width: `${course.progress}%`}}></div>
+                            <div className={`h-2 rounded-full transition-all ${
+                              course.completed ? 'bg-green-600' : 'bg-blue-600'
+                            }`} style={{width: `${course.progress}%`}}></div>
                           </div>
                         </div>
                       </div>
-                      <button className="bg-blue-600 text-white px-3 sm:px-4 py-2 rounded hover:bg-blue-700 text-sm w-full sm:w-auto">
-                        Continue
-                      </button>
+                      {course.completed ? (
+                        <Link href={`/assessment?course=${encodeURIComponent(course.title)}`}>
+                          <button className="bg-green-600 text-white px-3 sm:px-4 py-2 rounded hover:bg-green-700 text-sm w-full sm:w-auto">
+                            Take Assessment
+                          </button>
+                        </Link>
+                      ) : course.progress > 0 ? (
+                        <Link href={`/learn?course=${encodeURIComponent(course.title)}`}>
+                          <button className="bg-blue-600 text-white px-3 sm:px-4 py-2 rounded hover:bg-blue-700 text-sm w-full sm:w-auto">
+                            Continue
+                          </button>
+                        </Link>
+                      ) : (
+                        <Link href={`/learn?course=${encodeURIComponent(course.title)}`}>
+                          <button className="bg-gray-600 text-white px-3 sm:px-4 py-2 rounded hover:bg-gray-700 text-sm w-full sm:w-auto">
+                            Start Course
+                          </button>
+                        </Link>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -109,15 +164,17 @@ export default function Dashboard() {
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span className="text-sm sm:text-base">Courses Enrolled</span>
-                    <span className="font-semibold text-sm sm:text-base">2</span>
+                    <span className="font-semibold text-sm sm:text-base">{courses.length}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm sm:text-base">Hours Learned</span>
-                    <span className="font-semibold text-sm sm:text-base">24</span>
+                    <span className="text-sm sm:text-base">Courses Completed</span>
+                    <span className="font-semibold text-sm sm:text-base">{courses.filter(c => c.completed).length}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm sm:text-base">Certificates</span>
-                    <span className="font-semibold text-sm sm:text-base">0</span>
+                    <span className="text-sm sm:text-base">Average Progress</span>
+                    <span className="font-semibold text-sm sm:text-base">
+                      {Math.round(courses.reduce((sum, c) => sum + c.progress, 0) / courses.length)}%
+                    </span>
                   </div>
                 </div>
               </div>
