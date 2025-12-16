@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
+import jsPDF from 'jspdf'
 
 function AssessmentContent() {
   const [currentQuestion, setCurrentQuestion] = useState(0)
@@ -106,7 +107,74 @@ function AssessmentContent() {
 
   const generateCertificate = () => {
     if (score >= 80) {
-      router.push(`/certificate?course=${encodeURIComponent(courseTitle)}&score=${score}`)
+      const pdf = new jsPDF('landscape', 'mm', 'a4')
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
+      
+      // Background
+      pdf.setFillColor(255, 255, 255)
+      pdf.rect(0, 0, pageWidth, pageHeight, 'F')
+      
+      // Border
+      pdf.setDrawColor(11, 78, 162)
+      pdf.setLineWidth(3)
+      pdf.rect(10, 10, pageWidth - 20, pageHeight - 20)
+      
+      // Header
+      pdf.setFontSize(28)
+      pdf.setTextColor(11, 78, 162)
+      pdf.text('RAILWAY TRAINING', pageWidth / 2, 40, { align: 'center' })
+      
+      pdf.setFontSize(16)
+      pdf.text('PROFESSIONAL CERTIFICATION', pageWidth / 2, 50, { align: 'center' })
+      
+      // Certificate Title
+      pdf.setFontSize(24)
+      pdf.setTextColor(0, 0, 0)
+      pdf.text('CERTIFICATE OF ACHIEVEMENT', pageWidth / 2, 70, { align: 'center' })
+      
+      // Content
+      pdf.setFontSize(14)
+      pdf.text('This is to certify that', pageWidth / 2, 90, { align: 'center' })
+      
+      // Student Name
+      const userData = localStorage.getItem('user')
+      const userName = userData ? JSON.parse(userData).name : 'STUDENT NAME'
+      pdf.setFontSize(20)
+      pdf.setTextColor(11, 78, 162)
+      pdf.text(userName.toUpperCase(), pageWidth / 2, 110, { align: 'center' })
+      
+      // Course completion text
+      pdf.setFontSize(14)
+      pdf.setTextColor(0, 0, 0)
+      pdf.text('has successfully completed the professional training course', pageWidth / 2, 125, { align: 'center' })
+      
+      // Course Title
+      pdf.setFontSize(18)
+      pdf.setTextColor(11, 78, 162)
+      const lines = pdf.splitTextToSize(courseTitle, pageWidth - 60)
+      pdf.text(lines, pageWidth / 2, 140, { align: 'center' })
+      
+      // Score
+      pdf.setFontSize(14)
+      pdf.setTextColor(0, 0, 0)
+      pdf.text(`Final Assessment Score: ${score.toFixed(0)}%`, pageWidth / 2, 160, { align: 'center' })
+      
+      // Date
+      const currentDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })
+      pdf.text(`Date of Completion: ${currentDate}`, pageWidth / 2, 175, { align: 'center' })
+      
+      // Certificate ID
+      const certId = `RT-${new Date().getFullYear()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
+      pdf.setFontSize(10)
+      pdf.text(`Certificate ID: ${certId}`, pageWidth / 2, 190, { align: 'center' })
+      
+      // Download PDF
+      pdf.save(`${courseTitle.replace(/[^a-zA-Z0-9]/g, '_')}_Certificate.pdf`)
     }
   }
 
@@ -183,7 +251,7 @@ function AssessmentContent() {
                     onClick={generateCertificate}
                     className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 font-semibold transition-colors"
                   >
-                    🏆 Get Certificate
+                    📄 Download Certificate PDF
                   </button>
                   <Link href="/dashboard">
                     <button className="bg-gray-100 text-gray-700 px-8 py-3 rounded-xl hover:bg-gray-200 font-semibold transition-colors">
