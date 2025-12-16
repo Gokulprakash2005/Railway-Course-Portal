@@ -25,7 +25,7 @@ export default function LearnPage() {
             {
               title: "Circuit Breaker Operation & Components",
               type: "video",
-              content: "https://youtu.be/a3lZukx0Cdc?si=oR-3yRFT4BYgSyMe",
+              content: "https://youtu.be/a3lZukx0Cdc?si=ByWXqDPKnWATZ0h9",
               duration: "12 min"
             },
             {
@@ -42,7 +42,7 @@ export default function LearnPage() {
             {
               title: "Preventive Maintenance Techniques",
               type: "video",
-              content: "/ODeX - Google Chrome 2025-12-14 14-03-17.mp4",
+              content: "https://youtu.be/a3lZukx0Cdc?si=ByWXqDPKnWATZ0h9",
               duration: "18 min"
             },
             {
@@ -59,7 +59,7 @@ export default function LearnPage() {
             {
               title: "Common Faults & Solutions",
               type: "video",
-              content: "/ODeX - Google Chrome 2025-12-14 14-03-17.mp4",
+              content: "https://youtu.be/a3lZukx0Cdc?si=ByWXqDPKnWATZ0h9",
               duration: "20 min"
             },
             {
@@ -81,13 +81,13 @@ export default function LearnPage() {
           {
             title: "Safety Overview",
             type: "video",
-            content: "/ODeX - Google Chrome 2025-12-14 14-03-17.mp4",
+            content: "https://youtu.be/a3lZukx0Cdc?si=ByWXqDPKnWATZ0h9",
             duration: "10 min"
           },
           {
             title: "Safety Guidelines Document",
             type: "pdf",
-            content: "/Untitled document.pdf",
+            content: "/VAC CB TI-MI-0054 Rev 1.pdf",
             duration: "5 min"
           }
         ]
@@ -98,13 +98,13 @@ export default function LearnPage() {
           {
             title: "Risk Analysis Methods",
             type: "video",
-            content: "/ODeX - Google Chrome 2025-12-14 14-03-17.mp4",
+            content: "https://youtu.be/a3lZukx0Cdc?si=ByWXqDPKnWATZ0h9",
             duration: "15 min"
           },
           {
             title: "Assessment Forms & Documentation",
             type: "pdf",
-            content: "/Untitled document.pdf",
+            content: "/VAC CB TI-MI-0054 Rev 1.pdf",
             duration: "5 min"
           }
         ]
@@ -115,13 +115,13 @@ export default function LearnPage() {
           {
             title: "Emergency Procedures",
             type: "video",
-            content: "/ODeX - Google Chrome 2025-12-14 14-03-17.mp4",
+            content: "https://youtu.be/a3lZukx0Cdc?si=ByWXqDPKnWATZ0h9",
             duration: "20 min"
           },
           {
             title: "Response Manual",
             type: "pdf",
-            content: "/Untitled document.pdf",
+            content: "/VAC CB TI-MI-0054 Rev 1.pdf",
             duration: "5 min"
           }
         ]
@@ -349,14 +349,26 @@ export default function LearnPage() {
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
             <div className="aspect-video bg-black">
               {module.type === 'video' ? (
-                <video
-                  controls
-                  className="w-full h-full"
-                  onEnded={handleModuleComplete}
-                >
-                  <source src={module.content} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                module.content.includes('youtube.com') || module.content.includes('youtu.be') ? (
+                  <iframe
+                    className="w-full h-full"
+                    src={module.content.replace('youtu.be/', 'youtube.com/embed/').replace('watch?v=', 'embed/').split('?')[0]}
+                    title={module.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    onLoad={() => setTimeout(() => setModuleCompleted(true), 3000)}
+                  ></iframe>
+                ) : (
+                  <video
+                    controls
+                    className="w-full h-full"
+                    onEnded={handleModuleComplete}
+                  >
+                    <source src={module.content} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
                   <div className="text-center">
