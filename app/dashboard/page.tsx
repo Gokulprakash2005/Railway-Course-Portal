@@ -18,29 +18,63 @@ export default function Dashboard() {
     window.location.href = '/'
   }
 
-  const [courses, setCourses] = useState([
-    {
-      title: "25kV Vacuum Circuit Breaker Maintenance",
-      instructor: "Dr. Rajesh Kumar",
-      progress: 0,
-      image: "/Gemini_Generated_Image_evhen0evhen0evhe.png",
-      category: "Railway Safety",
-      completed: false
-    },
-    {
-      title: "Railway Signal Systems", 
-      instructor: "Eng. Priya Sharma",
-      progress: 0,
-      image: "/Gemini_Generated_Image_k4vd1ak4vd1ak4vd.png",
-      category: "Signal Engineering",
-      completed: false
-    }
-  ])
+  interface Course {
+    title: string
+    instructor: string
+    progress: number
+    image: string
+    category: string
+    completed: boolean
+  }
+
+  const [courses, setCourses] = useState<Course[]>([])
 
   useEffect(() => {
-    // Load progress from localStorage
-    const updatedCourses = courses.map(course => {
-      const progressKey = `progress_${course.title.replace(/\s+/g, '_')}`
+    if (!user?.email) return
+    
+    // Get enrolled courses for this user
+    const enrolledCourses = JSON.parse(localStorage.getItem(`enrolledCourses_${user.email}`) || '[]')
+    
+    const allCourses = [
+      {
+        title: "25kV Vacuum Circuit Breaker Maintenance",
+        instructor: "Sr. Electrical Eng. Suresh Patel",
+        progress: 0,
+        image: "/Gemini_Generated_Image_evhen0evhen0evhe.png",
+        category: "Electrical Systems",
+        completed: false
+      },
+      {
+        title: "Railway Safety Management",
+        instructor: "Dr. Rajesh Kumar",
+        progress: 0,
+        image: "/Gemini_Generated_Image_vydyqvydyqvydyqv.png",
+        category: "Safety & Operations",
+        completed: false
+      },
+      {
+        title: "Signal & Interlocking Systems",
+        instructor: "Eng. Priya Sharma",
+        progress: 0,
+        image: "/Gemini_Generated_Image_k4vd1ak4vd1ak4vd.png",
+        category: "Signaling",
+        completed: false
+      },
+      {
+        title: "Track Maintenance & Engineering",
+        instructor: "Chief Eng. Amit Singh",
+        progress: 0,
+        image: "/Gemini_Generated_Image_d2atv1d2atv1d2at.png",
+        category: "Engineering",
+        completed: false
+      }
+    ]
+    
+    // Filter to show only enrolled courses with progress
+    const userCourses: Course[] = allCourses.filter(course => 
+      enrolledCourses.includes(course.title)
+    ).map(course => {
+      const progressKey = `progress_${user.email}_${course.title.replace(/\s+/g, '_')}`
       const savedProgress = localStorage.getItem(progressKey)
       if (savedProgress) {
         const progress = JSON.parse(savedProgress)
@@ -55,7 +89,8 @@ export default function Dashboard() {
       }
       return course
     })
-    setCourses(updatedCourses)
+    
+    setCourses(userCourses)
   }, [user])
 
   const getCourseModuleCount = (courseTitle: string) => {
@@ -107,7 +142,19 @@ export default function Dashboard() {
             <div className="lg:col-span-2">
               <h2 className="text-lg sm:text-xl font-semibold mb-4">My Learning</h2>
               <div className="space-y-4">
-                {courses.map((course, index) => (
+                {courses.length === 0 ? (
+                  <div className="bg-white rounded-lg p-6 text-center">
+                    <div className="text-gray-400 text-4xl mb-4">📚</div>
+                    <h3 className="text-lg font-semibold text-gray-700 mb-2">No Enrolled Courses</h3>
+                    <p className="text-gray-500 mb-4">Start your learning journey by enrolling in courses</p>
+                    <Link href="/courses">
+                      <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                        Browse Courses
+                      </button>
+                    </Link>
+                  </div>
+                ) : (
+                  courses.map((course, index) => (
                   <div key={index} className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                       <img src={course.image} alt={course.title} className="w-16 h-16 rounded object-cover" />
@@ -154,7 +201,8 @@ export default function Dashboard() {
                       )}
                     </div>
                   </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
 
@@ -173,7 +221,7 @@ export default function Dashboard() {
                   <div className="flex justify-between">
                     <span className="text-sm sm:text-base">Average Progress</span>
                     <span className="font-semibold text-sm sm:text-base">
-                      {Math.round(courses.reduce((sum, c) => sum + c.progress, 0) / courses.length)}%
+                      {courses.length > 0 ? Math.round(courses.reduce((sum, c) => sum + c.progress, 0) / courses.length) : 0}%
                     </span>
                   </div>
                 </div>

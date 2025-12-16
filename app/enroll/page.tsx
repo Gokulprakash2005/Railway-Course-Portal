@@ -19,12 +19,15 @@ function EnrollContent() {
   }, [])
 
   const handleEnroll = () => {
-    // Save enrollment to localStorage
-    const enrolled = localStorage.getItem('enrolledCourses')
+    if (!user?.email) return
+    
+    // Save enrollment to localStorage with user-specific key
+    const enrollmentKey = `enrolledCourses_${user.email}`
+    const enrolled = localStorage.getItem(enrollmentKey)
     const enrolledCourses = enrolled ? JSON.parse(enrolled) : []
     if (!enrolledCourses.includes(courseTitle)) {
       enrolledCourses.push(courseTitle)
-      localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses))
+      localStorage.setItem(enrollmentKey, JSON.stringify(enrolledCourses))
     }
     
     alert('Successfully enrolled in the course!')

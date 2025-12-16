@@ -14,7 +14,7 @@ function LearnContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const courseTitle = searchParams.get('course') || 'Course'
-  const progressKey = `progress_${courseTitle.replace(/\s+/g, '_')}`
+  const progressKey = user?.email ? `progress_${user.email}_${courseTitle.replace(/\s+/g, '_')}` : null
 
   const getCourseContent = (courseTitle: string) => {
     if (courseTitle === '25kV Vacuum Circuit Breaker Maintenance') {
@@ -139,7 +139,7 @@ function LearnContent() {
       router.push('/login')
     }
 
-    const savedProgress = localStorage.getItem(progressKey)
+    const savedProgress = progressKey ? localStorage.getItem(progressKey) : null
     if (savedProgress) {
       const progress = JSON.parse(savedProgress)
       setCurrentLesson(progress.currentLesson || 0)
@@ -182,7 +182,7 @@ function LearnContent() {
         currentModule: currentModule < lessons[currentLesson].modules.length - 1 ? currentModule + 1 : 0,
         completedModules: newCompletedModules
       }
-      localStorage.setItem(progressKey, JSON.stringify(progress))
+      if (progressKey) localStorage.setItem(progressKey, JSON.stringify(progress))
     }
   }
 
@@ -285,7 +285,7 @@ function LearnContent() {
                           currentModule: moduleIndex,
                           completedModules
                         }
-                        localStorage.setItem(progressKey, JSON.stringify(progress))
+                        if (progressKey) localStorage.setItem(progressKey, JSON.stringify(progress))
                       }}
                       className={`p-4 cursor-pointer border-l-4 transition-colors ${
                         isActive 

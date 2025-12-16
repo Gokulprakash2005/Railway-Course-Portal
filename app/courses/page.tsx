@@ -16,9 +16,12 @@ export default function CoursesPage() {
     if (userData) {
       setUser(JSON.parse(userData))
     }
-    const enrolled = localStorage.getItem('enrolledCourses')
-    if (enrolled) {
-      setEnrolledCourses(JSON.parse(enrolled))
+    if (userData) {
+      const enrollmentKey = `enrolledCourses_${JSON.parse(userData).email}`
+      const enrolled = localStorage.getItem(enrollmentKey)
+      if (enrolled) {
+        setEnrolledCourses(JSON.parse(enrolled))
+      }
     }
   }, [])
 
