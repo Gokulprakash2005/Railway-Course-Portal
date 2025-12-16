@@ -23,7 +23,7 @@ export default function Dashboard() {
       title: "25kV Vacuum Circuit Breaker Maintenance",
       instructor: "Dr. Rajesh Kumar",
       progress: 0,
-      image: "/OIP (4).jpg",
+      image: "/Gemini_Generated_Image_evhen0evhen0evhe.png",
       category: "Railway Safety",
       completed: false
     },
@@ -31,7 +31,7 @@ export default function Dashboard() {
       title: "Railway Signal Systems", 
       instructor: "Eng. Priya Sharma",
       progress: 0,
-      image: "/OIP (5).jpg",
+      image: "/Gemini_Generated_Image_k4vd1ak4vd1ak4vd.png",
       category: "Signal Engineering",
       completed: false
     }
