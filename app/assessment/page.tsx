@@ -223,21 +223,21 @@ function AssessmentContent() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-4xl mx-auto px-4 lg:px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <Link href="/" className="flex items-center gap-3">
             <img src="/logo.png" alt="Logo" className="w-8 h-8" />
-            <span className="font-semibold text-gray-800">Southern Railway</span>
+            <span className="font-semibold text-gray-800 text-sm lg:text-base">Southern Railway</span>
           </Link>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 lg:gap-6">
             <div className={`flex items-center gap-2 px-3 py-1 rounded-full ${
               timeLeft < 300 ? 'bg-red-100 text-red-700' : 'bg-blue-100 text-blue-700'
             }`}>
               <span className="text-sm">⏱</span>
-              <span className="font-mono font-semibold">{formatTime(timeLeft)}</span>
+              <span className="font-mono font-semibold text-sm">{formatTime(timeLeft)}</span>
             </div>
             <button
               onClick={calculateScore}
-              className="text-sm text-gray-600 hover:text-gray-800 px-3 py-1 rounded-lg hover:bg-gray-100"
+              className="text-xs lg:text-sm text-gray-600 hover:text-gray-800 px-3 py-1 rounded-lg hover:bg-gray-100 whitespace-nowrap"
             >
               Submit Early
             </button>
@@ -245,8 +245,8 @@ function AssessmentContent() {
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto py-8 px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="max-w-4xl mx-auto py-4 lg:py-8 px-4 lg:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-6">
           {/* Question Navigation Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
@@ -285,7 +285,7 @@ function AssessmentContent() {
 
           {/* Main Question Area */}
           <div className="lg:col-span-3">
-            <div className="bg-white rounded-2xl shadow-lg p-8">
+            <div className="bg-white rounded-2xl shadow-lg p-4 lg:p-8">
               <div className="mb-8">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
@@ -301,7 +301,7 @@ function AssessmentContent() {
               </div>
 
               <div className="mb-8">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-8 leading-relaxed">
+                <h2 className="text-lg lg:text-2xl font-semibold text-gray-800 mb-6 lg:mb-8 leading-relaxed">
                   {questions[currentQuestion].question}
                 </h2>
                 <div className="space-y-4">
@@ -330,11 +330,11 @@ function AssessmentContent() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between pt-6 border-t">
+              <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t gap-4">
                 <button
                   onClick={prevQuestion}
                   disabled={currentQuestion === 0}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                  className={`flex items-center justify-center gap-2 px-4 lg:px-6 py-3 rounded-xl font-semibold transition-all w-full sm:w-auto ${
                     currentQuestion === 0
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -343,19 +343,19 @@ function AssessmentContent() {
                   ← Previous
                 </button>
 
-                <div className="text-sm text-gray-500">
+                <div className="text-xs lg:text-sm text-gray-500 text-center">
                   {answers[currentQuestion] !== undefined ? '✓ Answered' : 'Select an answer'}
                 </div>
 
                 <button
                   onClick={nextQuestion}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                  className={`flex items-center justify-center gap-2 px-4 lg:px-6 py-3 rounded-xl font-semibold transition-all w-full sm:w-auto ${
                     answers[currentQuestion] !== undefined
                       ? 'bg-blue-600 text-white hover:bg-blue-700'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
                 >
-                  {currentQuestion === questions.length - 1 ? 'Finish Assessment' : 'Next →'}
+                  {currentQuestion === questions.length - 1 ? 'Finish' : 'Next →'}
                 </button>
               </div>
             </div>
