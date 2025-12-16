@@ -88,7 +88,7 @@ export default function LoginPage() {
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Sign In</h2>
-              <p className="text-gray-800">Enter your credentials to access your account</p>
+              <p className="text-black">Enter your credentials to access your account</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -123,7 +123,7 @@ export default function LoginPage() {
               <div className="flex items-center justify-between">
                 <label className="flex items-center">
                   <input type="checkbox" className="w-4 h-4 text-orange-400 border-gray-300 rounded focus:ring-orange-400" />
-                  <span className="ml-2 text-sm text-gray-800">Remember me</span>
+                  <span className="ml-2 text-sm text-black">Remember me</span>
                 </label>
                 <a href="#" className="text-sm text-orange-500 hover:text-orange-600 font-medium">
                   Forgot password?
@@ -147,7 +147,7 @@ export default function LoginPage() {
             </form>
 
             <div className="mt-8 text-center">
-              <p className="text-gray-800">
+              <p className="text-black">
                 Don't have an account?{' '}
                 <Link href="/signup" className="text-orange-500 hover:text-orange-600 font-semibold">
                   Create Account

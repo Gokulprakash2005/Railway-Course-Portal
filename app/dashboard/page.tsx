@@ -108,21 +108,21 @@ export default function Dashboard() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 sm:gap-3">
               <img src="/logo.png" alt="Logo" className="w-8 h-8" />
-              <span className="font-bold text-lg sm:text-xl text-gray-800">Southern Railway</span>
+              <span className="font-bold text-lg sm:text-xl text-black">Southern Railway</span>
             </div>
             <div className="flex items-center gap-2 sm:gap-4">
-              <Link href="/courses" className="hidden sm:block text-gray-600 hover:text-gray-800 font-medium">
+              <Link href="/courses" className="hidden sm:block text-black hover:text-gray-800 font-medium">
                 Browse Courses
               </Link>
               <div className="flex items-center gap-2 sm:gap-3">
                 <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
                   {user?.name?.charAt(0)?.toUpperCase()}
                 </div>
-                <span className="hidden sm:block text-gray-700 font-medium">{user?.name}</span>
+                <span className="hidden sm:block text-black font-medium">{user?.name}</span>
               </div>
               <button
                 onClick={handleLogout}
-                className="text-gray-600 hover:text-red-500 font-medium text-sm sm:text-base"
+                className="text-black hover:text-red-500 font-medium text-sm sm:text-base"
               >
                 Logout
               </button>
@@ -135,7 +135,7 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, {user?.name}!</h1>
-            <p className="text-gray-800">Continue your learning journey</p>
+            <p className="text-black">Continue your learning journey</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -146,7 +146,7 @@ export default function Dashboard() {
                   <div className="bg-white rounded-lg p-6 text-center">
                     <div className="text-gray-400 text-4xl mb-4">📚</div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">No Enrolled Courses</h3>
-                    <p className="text-gray-800 mb-4">Start your learning journey by enrolling in courses</p>
+                    <p className="text-black mb-4">Start your learning journey by enrolling in courses</p>
                     <Link href="/courses">
                       <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                         Browse Courses
@@ -167,7 +167,7 @@ export default function Dashboard() {
                             </span>
                           )}
                         </div>
-                        <p className="text-xs sm:text-sm text-gray-800">by {course.instructor}</p>
+                        <p className="text-xs sm:text-sm text-black">by {course.instructor}</p>
                         <div className="mt-2">
                           <div className="flex justify-between text-xs sm:text-sm mb-1">
                             <span>Progress</span>
@@ -211,16 +211,16 @@ export default function Dashboard() {
               <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
                 <div className="space-y-4">
                   <div className="flex justify-between">
-                    <span className="text-sm sm:text-base">Courses Enrolled</span>
-                    <span className="font-semibold text-sm sm:text-base">{courses.length}</span>
+                    <span className="text-sm sm:text-base text-black">Courses Enrolled</span>
+                    <span className="font-semibold text-sm sm:text-base text-black">{courses.length}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm sm:text-base">Courses Completed</span>
-                    <span className="font-semibold text-sm sm:text-base">{courses.filter(c => c.completed).length}</span>
+                    <span className="text-sm sm:text-base text-black">Courses Completed</span>
+                    <span className="font-semibold text-sm sm:text-base text-black">{courses.filter(c => c.completed).length}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm sm:text-base">Average Progress</span>
-                    <span className="font-semibold text-sm sm:text-base">
+                    <span className="text-sm sm:text-base text-black">Average Progress</span>
+                    <span className="font-semibold text-sm sm:text-base text-black">
                       {courses.length > 0 ? Math.round(courses.reduce((sum, c) => sum + c.progress, 0) / courses.length) : 0}%
                     </span>
                   </div>

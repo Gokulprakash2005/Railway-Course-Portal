@@ -93,7 +93,7 @@ export default function CoursesPage() {
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
               Explore Our <span className="text-orange-500">Railway Courses</span>
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-black max-w-3xl mx-auto">
               Advance your railway career with expert-led courses designed for professionals at every level
             </p>
           </div>
@@ -125,7 +125,7 @@ export default function CoursesPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                       selectedCategory === category
                         ? 'bg-orange-500 text-white shadow-lg'
-                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                        : 'bg-gray-100 text-black hover:bg-gray-200'
                     }`}
                   >
                     {category}
@@ -137,7 +137,7 @@ export default function CoursesPage() {
 
           {/* RESULTS COUNT */}
           <div className="mb-6">
-            <p className="text-gray-600">
+            <p className="text-black">
               Showing <span className="font-semibold text-gray-900">{filteredCourses.length}</span> courses
               {selectedCategory !== 'All' && (
                 <span> in <span className="font-semibold text-orange-500">{selectedCategory}</span></span>
@@ -160,7 +160,7 @@ export default function CoursesPage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur-sm text-gray-700 text-xs font-medium px-3 py-1 rounded-full">
+                    <span className="bg-white/90 backdrop-blur-sm text-black text-xs font-medium px-3 py-1 rounded-full">
                       {course.level}
                     </span>
                   </div>
@@ -186,7 +186,7 @@ export default function CoursesPage() {
                   </h3>
 
                   {/* DESCRIPTION */}
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                  <p className="text-black text-sm mb-4 line-clamp-2">
                     {course.description}
                   </p>
 
@@ -195,7 +195,7 @@ export default function CoursesPage() {
                     <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
                       {course.instructor.split(' ').map(n => n[0]).join('')}
                     </div>
-                    <span className="text-sm text-gray-700 font-medium">{course.instructor}</span>
+                    <span className="text-sm text-black font-medium">{course.instructor}</span>
                   </div>
 
                   {/* STATS */}
@@ -203,11 +203,11 @@ export default function CoursesPage() {
                     <div className="flex items-center gap-4">
                       <div className="flex items-center gap-1">
                         <span className="text-yellow-400">⭐</span>
-                        <span className="text-sm font-medium text-gray-700">{course.rating}</span>
+                        <span className="text-sm font-medium text-black">{course.rating}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <span className="text-gray-400">👥</span>
-                        <span className="text-sm text-gray-600">{course.students}</span>
+                        <span className="text-sm text-black">{course.students}</span>
                       </div>
                     </div>
                     <span className="text-lg font-bold text-green-600">FREE</span>
@@ -247,7 +247,7 @@ export default function CoursesPage() {
             <div className="text-center py-16">
               <div className="text-6xl mb-4">🔍</div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-2">No courses found</h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-black mb-6">
                 Try adjusting your search or filter criteria
               </p>
               <button

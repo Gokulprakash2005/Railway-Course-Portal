@@ -108,7 +108,7 @@ export default function Features() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose Southern Railway Learning</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-black max-w-3xl mx-auto">
               Comprehensive railway training designed by experts, for experts. Advance your career with industry-leading courses.
             </p>
           </div>
@@ -120,7 +120,7 @@ export default function Features() {
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3 relative z-10">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed relative z-10">{feature.description}</p>
+                <p className="text-black leading-relaxed relative z-10">{feature.description}</p>
               </div>
             ))}
           </div>
