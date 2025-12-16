@@ -6,6 +6,7 @@ import Link from 'next/link'
 export default function Header() {
   const [user, setUser] = useState<any>(null)
   const [searchQuery, setSearchQuery] = useState('')
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const userData = localStorage.getItem('user')
@@ -50,7 +51,7 @@ export default function Header() {
           </div>
 
           {/* CENTER: SEARCH + COURSES */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden min-[1100px]:flex items-center gap-4">
 
             {/* SEARCH */}
             <form onSubmit={handleSearch} className="relative">
@@ -59,7 +60,7 @@ export default function Header() {
                 placeholder="Search courses..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-72 px-4 py-2.5 bg-white border border-gray-200 rounded-full text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                className="w-48 lg:w-72 px-4 py-2.5 bg-white border border-gray-200 rounded-full text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
               />
               <button
                 type="submit"
@@ -81,9 +82,19 @@ export default function Header() {
             </Link>
           </div>
 
+          {/* MOBILE MENU BUTTON */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="min-[1100px]:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
           {/* RIGHT: AUTH */}
           {user ? (
-            <div className="flex items-center gap-3">
+            <div className="hidden min-[1100px]:flex items-center gap-3">
               <Link href="/dashboard">
                 <button className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-colors duration-200 text-sm font-medium">
                   📚 My Learning
@@ -107,7 +118,7 @@ export default function Header() {
               </button>
             </div>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="hidden min-[1100px]:flex items-center gap-3">
               <Link href="/login">
                 <button className="px-5 py-2 border border-blue-600 text-blue-600 rounded-full text-sm hover:bg-blue-50">
                   Log in
@@ -122,6 +133,73 @@ export default function Header() {
           )}
 
         </div>
+
+        {/* MOBILE MENU */}
+        {mobileMenuOpen && (
+          <div className="min-[1100px]:hidden mt-2 bg-white/95 backdrop-blur-xl border border-white/30 rounded-2xl p-4 shadow-2xl">
+            {/* Search */}
+            <form onSubmit={handleSearch} className="mb-4">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search courses..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-full text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-orange-400 text-white p-2 rounded-full hover:bg-orange-500"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+
+            {/* Navigation */}
+            <div className="space-y-2">
+              <Link href="/courses" onClick={() => setMobileMenuOpen(false)}>
+                <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                  Courses
+                </button>
+              </Link>
+              
+              {user ? (
+                <>
+                  <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                    <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                      📚 My Learning
+                    </button>
+                  </Link>
+                  <div className="px-4 py-2 text-gray-600 text-sm">
+                    Welcome, {user.name}
+                  </div>
+                  <button
+                    onClick={() => { handleLogout(); setMobileMenuOpen(false); }}
+                    className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg"
+                  >
+                    🚪 Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">
+                      Log in
+                    </button>
+                  </Link>
+                  <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                    <button className="w-full text-left px-4 py-2 bg-orange-400 text-white hover:bg-orange-500 rounded-lg">
+                      Register
+                    </button>
+                  </Link>
+                </>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </header>
   )

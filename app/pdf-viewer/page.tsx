@@ -43,52 +43,67 @@ function PDFViewerContent() {
 
   return (
     <div className="h-screen w-screen bg-gray-900 overflow-hidden">
+      <style jsx>{`
+        iframe {
+          -webkit-overflow-scrolling: touch;
+        }
+        @media (max-width: 768px) {
+          iframe {
+            zoom: 0.75;
+          }
+        }
+      `}</style>
       {/* Header */}
-      <div className="bg-white shadow-sm p-4 flex justify-between items-center h-16">
-        <div>
-          <h1 className="text-xl font-semibold">{title}</h1>
-          {course && <p className="text-sm text-gray-600">{course}</p>}
+      <div className="bg-white shadow-sm p-3 lg:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 min-h-16">
+        <div className="flex-1 min-w-0">
+          <h1 className="text-lg lg:text-xl font-semibold truncate">{title}</h1>
+          {course && <p className="text-xs lg:text-sm text-gray-600 truncate">{course}</p>}
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-2 lg:gap-3">
           <a
             href={pdfUrl}
             download
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
+            className="bg-blue-600 text-white px-3 lg:px-4 py-2 rounded hover:bg-blue-700 text-xs lg:text-sm whitespace-nowrap"
           >
-            Download PDF
+            📥 Download
           </a>
           <button
             onClick={handleComplete}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 text-sm"
+            className="bg-green-600 text-white px-3 lg:px-4 py-2 rounded hover:bg-green-700 text-xs lg:text-sm whitespace-nowrap"
           >
-            Mark Complete & Return
+            ✓ Complete
           </button>
           <button
             onClick={() => router.back()}
-            className="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 text-sm"
+            className="bg-gray-600 text-white px-3 lg:px-4 py-2 rounded hover:bg-gray-700 text-xs lg:text-sm"
           >
-            Back
+            ← Back
           </button>
         </div>
       </div>
 
       {/* Full-page PDF Viewer */}
-      <div className="h-[calc(100vh-4rem)] w-full bg-gray-800">
+      <div className="h-[calc(100vh-5rem)] sm:h-[calc(100vh-4rem)] w-full bg-gray-800 overflow-auto">
         <iframe
           src={pdfUrl}
           className="w-full h-full border-0"
           title={title}
           onLoad={() => setIsLoaded(true)}
+          style={{
+            transform: 'scale(1)',
+            transformOrigin: 'top left',
+            overflow: 'auto'
+          }}
         >
-          <div className="flex items-center justify-center h-full text-white">
+          <div className="flex items-center justify-center h-full text-white p-4">
             <div className="text-center">
-              <p className="mb-4">Your browser does not support PDF viewing.</p>
+              <p className="mb-4 text-sm lg:text-base">Your browser does not support PDF viewing.</p>
               <a
                 href={pdfUrl}
                 download
-                className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
+                className="bg-blue-600 text-white px-4 lg:px-6 py-2 lg:py-3 rounded hover:bg-blue-700 text-sm lg:text-base"
               >
-                Download PDF
+                📥 Download PDF
               </a>
             </div>
           </div>
