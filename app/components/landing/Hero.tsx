@@ -53,7 +53,7 @@ export default function Hero() {
               {slide.title}
             </h1>
 
-            <p className="text-black text-lg max-w-xl mb-8">
+            <p className="text-gray-700 text-lg max-w-xl mb-8">
               {slide.description}
             </p>
 

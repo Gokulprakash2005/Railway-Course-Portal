@@ -45,7 +45,7 @@ export default function SignupPage() {
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h2>
-              <p className="text-black">Join thousands of railway professionals</p>
+              <p className="text-gray-800">Join thousands of railway professionals</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -93,7 +93,7 @@ export default function SignupPage() {
 
               <div className="flex items-start">
                 <input type="checkbox" required className="w-4 h-4 text-blue-400 border-gray-300 rounded focus:ring-blue-400 mt-1" />
-                <span className="ml-2 text-sm text-black">
+                <span className="ml-2 text-sm text-gray-800">
                   I agree to the{' '}
                   <a href="#" className="text-blue-500 hover:text-blue-600 font-medium">Terms of Service</a>
                   {' '}and{' '}
@@ -118,7 +118,7 @@ export default function SignupPage() {
             </form>
 
             <div className="mt-8 text-center">
-              <p className="text-black">
+              <p className="text-gray-800">
                 Already have an account?{' '}
                 <Link href="/login" className="text-blue-500 hover:text-blue-600 font-semibold">
                   Sign In

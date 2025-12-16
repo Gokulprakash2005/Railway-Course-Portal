@@ -149,7 +149,7 @@ export default function PopularCourses() {
                       {course.title}
                     </h3>
 
-                    <p className="text-xs text-black mb-3">
+                    <p className="text-xs text-gray-600 mb-3">
                       by {course.instructor}
                     </p>
 
