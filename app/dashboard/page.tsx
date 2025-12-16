@@ -39,51 +39,53 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Simple Header */}
       <div className="bg-white shadow-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img src="/logo.png" alt="Logo" className="w-8 h-8" />
-            <span className="font-bold text-xl text-gray-800">Southern Railway</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/courses" className="text-gray-600 hover:text-gray-800 font-medium">
-              Browse Courses
-            </Link>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
-                {user?.name?.charAt(0)?.toUpperCase()}
-              </div>
-              <span className="text-gray-700 font-medium">{user?.name}</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <img src="/logo.png" alt="Logo" className="w-8 h-8" />
+              <span className="font-bold text-lg sm:text-xl text-gray-800">Southern Railway</span>
             </div>
-            <button
-              onClick={handleLogout}
-              className="text-gray-600 hover:text-red-500 font-medium"
-            >
-              Logout
-            </button>
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Link href="/courses" className="hidden sm:block text-gray-600 hover:text-gray-800 font-medium">
+                Browse Courses
+              </Link>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">
+                  {user?.name?.charAt(0)?.toUpperCase()}
+                </div>
+                <span className="hidden sm:block text-gray-700 font-medium">{user?.name}</span>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="text-gray-600 hover:text-red-500 font-medium text-sm sm:text-base"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
       
-      <main className="py-8">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Welcome back, {user?.name}!</h1>
+      <main className="py-4 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-2">Welcome back, {user?.name}!</h1>
             <p className="text-gray-600">Continue your learning journey</p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             <div className="lg:col-span-2">
-              <h2 className="text-xl font-semibold mb-4">My Learning</h2>
+              <h2 className="text-lg sm:text-xl font-semibold mb-4">My Learning</h2>
               <div className="space-y-4">
                 {courses.map((course, index) => (
-                  <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
-                    <div className="flex items-center gap-4">
+                  <div key={index} className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                       <img src={course.image} alt={course.title} className="w-16 h-16 rounded object-cover" />
-                      <div className="flex-1">
-                        <h3 className="font-semibold">{course.title}</h3>
-                        <p className="text-sm text-gray-600">by {course.instructor}</p>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-sm sm:text-base">{course.title}</h3>
+                        <p className="text-xs sm:text-sm text-gray-600">by {course.instructor}</p>
                         <div className="mt-2">
-                          <div className="flex justify-between text-sm mb-1">
+                          <div className="flex justify-between text-xs sm:text-sm mb-1">
                             <span>Progress</span>
                             <span>{course.progress}%</span>
                           </div>
@@ -92,7 +94,7 @@ export default function Dashboard() {
                           </div>
                         </div>
                       </div>
-                      <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                      <button className="bg-blue-600 text-white px-3 sm:px-4 py-2 rounded hover:bg-blue-700 text-sm w-full sm:w-auto">
                         Continue
                       </button>
                     </div>
@@ -102,20 +104,20 @@ export default function Dashboard() {
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold mb-4">Quick Stats</h2>
-              <div className="bg-white rounded-lg p-6 shadow-sm">
+              <h2 className="text-lg sm:text-xl font-semibold mb-4">Quick Stats</h2>
+              <div className="bg-white rounded-lg p-4 sm:p-6 shadow-sm">
                 <div className="space-y-4">
                   <div className="flex justify-between">
-                    <span>Courses Enrolled</span>
-                    <span className="font-semibold">2</span>
+                    <span className="text-sm sm:text-base">Courses Enrolled</span>
+                    <span className="font-semibold text-sm sm:text-base">2</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Hours Learned</span>
-                    <span className="font-semibold">24</span>
+                    <span className="text-sm sm:text-base">Hours Learned</span>
+                    <span className="font-semibold text-sm sm:text-base">24</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Certificates</span>
-                    <span className="font-semibold">0</span>
+                    <span className="text-sm sm:text-base">Certificates</span>
+                    <span className="font-semibold text-sm sm:text-base">0</span>
                   </div>
                 </div>
               </div>
