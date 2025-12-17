@@ -84,9 +84,33 @@ export default function CoursesPage() {
   if (user) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-        <Header hideSearch={true} />
+        {/* COURSERA-STYLE HEADER */}
+        <header className="bg-white border-b border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-16">
+              <Link href="/dashboard" className="flex items-center hover:opacity-80 transition-opacity">
+                <img src="/logo.png" alt="Logo" className="h-8 w-8" />
+                <span className="ml-3 text-xl font-bold text-blue-600">Southern Railway</span>
+              </Link>
+              <nav className="hidden md:flex space-x-8">
+                <span className="text-blue-600 font-medium border-b-2 border-blue-600 pb-4">Explore</span>
+                <Link href="/dashboard" className="text-gray-700 hover:text-blue-600 font-medium">
+                  My Learning
+                </Link>
+              </nav>
+              <div className="flex items-center space-x-4">
+                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                  <span className="text-white text-sm font-medium">{user?.name?.charAt(0)?.toUpperCase()}</span>
+                </div>
+                <button onClick={() => { localStorage.removeItem('user'); window.location.href = '/'; }} className="text-gray-500 hover:text-gray-700">
+                  Sign out
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
         
-        <main className="pt-32 pb-16">
+        <main className="pt-8 pb-16">
           <div className="max-w-7xl mx-auto px-6">
             
             {/* LOGGED IN HERO */}
@@ -263,7 +287,7 @@ export default function CoursesPage() {
   // NOT LOGGED IN VERSION
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50">
-      <Header />
+      <Header hideSearch={true} />
       
       <main className="pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-6">
