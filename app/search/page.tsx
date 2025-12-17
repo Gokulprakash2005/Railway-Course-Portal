@@ -12,7 +12,30 @@ function SearchContent() {
   const searchParams = useSearchParams()
   const query = searchParams.get('q') || ''
 
-  const allCourses = [
+  useEffect(() => {
+    const userData = localStorage.getItem('user')
+    if (userData) {
+      setUser(JSON.parse(userData))
+      const enrollmentKey = `enrolledCourses_${JSON.parse(userData).email}`
+      const enrolled = localStorage.getItem(enrollmentKey)
+      if (enrolled) {
+        setEnrolledCourses(JSON.parse(enrolled))
+      }
+    }
+  }, [])
+
+  const courses = [
+    {
+      title: "25kV Vacuum Circuit Breaker Maintenance",
+      instructor: "Sr. Electrical Eng. Suresh Patel",
+      rating: 4.9,
+      students: "15,432",
+      image: "/Gemini_Generated_Image_evhen0evhen0evhe.png",
+      category: "Electrical Systems",
+      duration: "4 weeks",
+      level: "Advanced",
+      description: "Complete maintenance procedures for 25kV Vacuum Circuit Breakers and Interrupters used in Indian Railway Traction System"
+    },
     {
       title: "Railway Safety Management",
       instructor: "Dr. Rajesh Kumar",
@@ -20,6 +43,9 @@ function SearchContent() {
       students: "12,345",
       image: "/Gemini_Generated_Image_vydyqvydyqvydyqv.png",
       category: "Safety & Operations",
+      duration: "8 weeks",
+      level: "Intermediate",
+      description: "Comprehensive safety protocols and risk management in railway operations"
     },
     {
       title: "Signal & Interlocking Systems",
@@ -28,6 +54,9 @@ function SearchContent() {
       students: "8,765",
       image: "/Gemini_Generated_Image_k4vd1ak4vd1ak4vd.png",
       category: "Signaling",
+      duration: "6 weeks",
+      level: "Advanced",
+      description: "Modern signaling technology and interlocking system design"
     },
     {
       title: "Track Maintenance & Engineering",
@@ -36,110 +65,155 @@ function SearchContent() {
       students: "9,876",
       image: "/Gemini_Generated_Image_d2atv1d2atv1d2at.png",
       category: "Engineering",
+      duration: "10 weeks",
+      level: "Beginner",
+      description: "Track infrastructure maintenance and engineering best practices"
     },
-    {
-      title: "Complete Web Development",
-      instructor: "John Smith",
-      rating: 4.8,
-      students: "12,345",
-      image: "/OIP (4).jpg",
-      category: "Web Development",
-    },
-    {
-      title: "Data Science Fundamentals",
-      instructor: "Sarah Johnson",
-      rating: 4.9,
-      students: "8,765",
-      image: "/OIP (5).jpg",
-      category: "Data Science",
-    }
   ]
 
-  useEffect(() => {
-    const userData = localStorage.getItem('user')
-    if (userData) {
-      setUser(JSON.parse(userData))
-    }
-    const enrolled = localStorage.getItem('enrolledCourses')
-    if (enrolled) {
-      setEnrolledCourses(JSON.parse(enrolled))
-    }
-  }, [])
-
-  const filteredCourses = allCourses.filter(course =>
+  const filteredCourses = courses.filter(course => 
     course.title.toLowerCase().includes(query.toLowerCase()) ||
+    course.instructor.toLowerCase().includes(query.toLowerCase()) ||
     course.category.toLowerCase().includes(query.toLowerCase()) ||
-    course.instructor.toLowerCase().includes(query.toLowerCase())
+    course.description.toLowerCase().includes(query.toLowerCase())
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50">
       <Header />
       
-      <main className="pt-24 pb-16">
+      <main className="pt-32 pb-16">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Search Results</h1>
-            <p className="text-gray-600">
-              {filteredCourses.length} results for "{query}"
-            </p>
+          
+          {/* SEARCH RESULTS HEADER */}
+          <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-gray-100">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                <span className="text-orange-600 text-xl">🔍</span>
+              </div>
+              <div>
+                <h1 className="text-2xl lg:text-3xl font-bold text-black">
+                  Search Results
+                </h1>
+                <p className="text-black text-sm">
+                  Searching for: <span className="font-semibold text-orange-600">"{query}"</span>
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-black">
+                Found <span className="font-semibold text-green-600">{filteredCourses.length}</span> courses
+              </p>
+              <Link href="/courses">
+                <button className="text-orange-600 hover:text-orange-700 font-medium text-sm">
+                  Browse All Courses →
+                </button>
+              </Link>
+            </div>
           </div>
 
-          {filteredCourses.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* RESULTS */}
+          {filteredCourses.length === 0 ? (
+            <div className="text-center py-16">
+              <div className="text-6xl mb-4">🔍</div>
+              <h3 className="text-2xl font-semibold text-black mb-2">No courses found</h3>
+              <p className="text-black mb-6">
+                Try searching with different keywords or browse all courses
+              </p>
+              <Link href="/courses">
+                <button className="bg-orange-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-orange-600 transition-colors">
+                  Browse All Courses
+                </button>
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredCourses.map((course, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition"
+                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-orange-200"
                 >
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="h-48 w-full object-cover"
-                  />
+                  {/* IMAGE */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-white/90 backdrop-blur-sm text-black text-xs font-medium px-3 py-1 rounded-full">
+                        {course.level}
+                      </span>
+                    </div>
+                    <div className="absolute top-4 right-4">
+                      <span className="bg-black/70 text-white text-xs px-2 py-1 rounded">
+                        {course.duration}
+                      </span>
+                    </div>
+                  </div>
 
+                  {/* CONTENT */}
                   <div className="p-6">
-                    <span className="text-xs bg-blue-100 text-blue-600 px-2 py-1 rounded mb-3 inline-block">
-                      {course.category}
-                    </span>
-
-                    <h3 className="text-xl font-semibold mb-2">
-                      {course.title}
-                    </h3>
-
-                    <p className="text-gray-600 mb-3">
-                      by {course.instructor}
-                    </p>
-
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="text-yellow-500">★ {course.rating}</span>
-                      <span className="text-gray-500">
-                        {course.students} students
+                    {/* CATEGORY */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="bg-orange-100 text-orange-600 text-xs font-medium px-3 py-1 rounded-full">
+                        📚 {course.category}
                       </span>
                     </div>
 
-                    <div className="flex justify-between items-center">
-                      <span className="text-green-600 font-bold text-lg">
-                        FREE
-                      </span>
+                    {/* TITLE */}
+                    <h3 className="text-lg font-bold text-black mb-2 group-hover:text-orange-600 transition-colors">
+                      {course.title}
+                    </h3>
+
+                    {/* DESCRIPTION */}
+                    <p className="text-black text-sm mb-4 line-clamp-2">
+                      {course.description}
+                    </p>
+
+                    {/* INSTRUCTOR */}
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                        {course.instructor.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <span className="text-sm text-black font-medium">{course.instructor}</span>
+                    </div>
+
+                    {/* STATS */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-1">
+                          <span className="text-yellow-400">⭐</span>
+                          <span className="text-sm font-medium text-black">{course.rating}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <span className="text-gray-400">👥</span>
+                          <span className="text-sm text-black">{course.students}</span>
+                        </div>
+                      </div>
+                      <span className="text-lg font-bold text-green-600">FREE</span>
+                    </div>
+
+                    {/* ACTION BUTTON */}
+                    <div className="pt-4 border-t border-gray-100">
                       {user ? (
                         enrolledCourses.includes(course.title) ? (
                           <Link href={`/learn?course=${encodeURIComponent(course.title)}`}>
-                            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-                              Continue
+                            <button className="w-full bg-green-500 text-white py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors duration-200 flex items-center justify-center gap-2">
+                              📖 Continue Learning
                             </button>
                           </Link>
                         ) : (
                           <Link href={`/enroll?course=${encodeURIComponent(course.title)}`}>
-                            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-                              Enroll Now
+                            <button className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl font-semibold hover:from-orange-600 hover:to-orange-700 transition-all duration-200 shadow-lg hover:shadow-xl">
+                              🚀 Enroll Now
                             </button>
                           </Link>
                         )
                       ) : (
                         <Link href="/signup">
-                          <button className="border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-600 hover:text-white transition">
-                            View Course
+                          <button className="w-full border-2 border-orange-500 text-orange-600 py-3 rounded-xl font-semibold hover:bg-orange-50 transition-colors duration-200">
+                            👁️ View Course
                           </button>
                         </Link>
                       )}
@@ -147,19 +221,6 @@ function SearchContent() {
                   </div>
                 </div>
               ))}
-            </div>
-          ) : (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-4">🔍</div>
-              <h2 className="text-2xl font-semibold mb-2">No courses found</h2>
-              <p className="text-gray-600 mb-6">
-                Try searching with different keywords or browse all courses
-              </p>
-              <Link href="/courses">
-                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
-                  Browse All Courses
-                </button>
-              </Link>
             </div>
           )}
         </div>
@@ -172,7 +233,7 @@ function SearchContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="text-lg">Loading search results...</div></div>}>
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-blue-50 flex items-center justify-center"><div className="text-lg">Loading search results...</div></div>}>
       <SearchContent />
     </Suspense>
   )

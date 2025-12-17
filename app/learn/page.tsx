@@ -350,26 +350,14 @@ function LearnContent() {
           <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
             <div className="aspect-video bg-black">
               {module.type === 'video' ? (
-                module.content.includes('youtube.com') || module.content.includes('youtu.be') ? (
-                  <iframe
-                    className="w-full h-full"
-                    src={module.content.replace('youtu.be/', 'youtube.com/embed/').replace('watch?v=', 'embed/').split('?')[0]}
-                    title={module.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    onLoad={() => setTimeout(() => setModuleCompleted(true), 3000)}
-                  ></iframe>
-                ) : (
-                  <video
-                    controls
-                    className="w-full h-full"
-                    onEnded={handleModuleComplete}
-                  >
-                    <source src={module.content} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                )
+                <video
+                  controls
+                  className="w-full h-full"
+                  onEnded={handleModuleComplete}
+                >
+                  <source src="/WhatsApp Video 2025-12-17 at 2.18.07 PM.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               ) : (
                 <div className="w-full h-full bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-4 sm:p-6 min-h-[400px]">
                   <div className="flex flex-col items-center justify-center text-center w-full max-w-xs sm:max-w-sm mx-auto">
