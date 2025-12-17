@@ -50,7 +50,7 @@ export default function SignupPage() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-black mb-2">
                   Full Name
                 </label>
                 <input
@@ -64,7 +64,7 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-black mb-2">
                   Email Address
                 </label>
                 <input
@@ -78,7 +78,7 @@ export default function SignupPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-black mb-2">
                   Password
                 </label>
                 <input
