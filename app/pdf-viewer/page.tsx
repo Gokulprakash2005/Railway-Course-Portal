@@ -64,7 +64,7 @@ function PDFViewerContent() {
       {/* Header */}
       <div className="bg-white shadow-sm p-3 lg:p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 min-h-16">
         <div className="flex-1 min-w-0">
-          <h1 className="text-lg lg:text-xl font-semibold truncate">{title}</h1>
+          <h1 className="text-lg lg:text-xl font-semibold truncate text-black">{title}</h1>
           {course && <p className="text-xs lg:text-sm text-gray-600 truncate">{course}</p>}
         </div>
         <div className="flex flex-wrap gap-2 lg:gap-3">
