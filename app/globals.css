@@ -21,14 +21,6 @@
 
 body {
   background: var(--background);
-  color: black;
+  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.text-gray-500,
-.text-gray-600,
-.text-gray-700,
-.text-gray-800,
-.text-gray-900 {
-  color: black !important;
 }
