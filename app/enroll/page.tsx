@@ -54,10 +54,10 @@ function EnrollContent() {
       <main className="py-16">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-white rounded-lg shadow-md p-8">
-            <h1 className="text-3xl font-bold mb-6">Enroll in Course</h1>
+            <h1 className="text-3xl font-bold mb-6 text-black">Enroll in Course</h1>
             
             <div className="mb-8">
-              <h2 className="text-xl font-semibold mb-4">{courseTitle}</h2>
+              <h2 className="text-xl font-semibold mb-4 text-black">{courseTitle}</h2>
               <p className="text-gray-600 mb-4">
                 You're about to enroll in this free course. Once enrolled, you'll have lifetime access to all course materials.
               </p>
