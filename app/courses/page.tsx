@@ -109,7 +109,7 @@ export default function CoursesPage() {
                   placeholder="Search courses, instructors..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-gray-50 focus:bg-white transition-all duration-200"
+                  className="w-full px-4 py-3 pl-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-gray-50 focus:bg-white transition-all duration-200 text-black"
                 />
                 <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black">
                   🔍
