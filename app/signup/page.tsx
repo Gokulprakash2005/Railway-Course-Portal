@@ -56,7 +56,7 @@ export default function SignupPage() {
                 <input
                   type="text"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white text-black"
                   placeholder="Enter your full name"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
@@ -70,7 +70,7 @@ export default function SignupPage() {
                 <input
                   type="email"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white text-black"
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -84,7 +84,7 @@ export default function SignupPage() {
                 <input
                   type="password"
                   required
-                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white text-black"
                   placeholder="Create a strong password"
                   value={formData.password}
                   onChange={(e) => setFormData({...formData, password: e.target.value})}
